@@ -43,24 +43,20 @@ def on_twitch_event(event, msg):
     print(f"{event}: {msg.attrs()}")
 
 
-def register_callbacks(client):
-    client.obs.on("streamlabs", on_twitch_event)
-    client.obs.on("twitch_account", on_twitch_event)
-
-
 def main():
     with streamlabsio.connect(token="<apikey>") as client:
-        worker = Thread(target=register_callbacks, args=(client,), daemon=True)
-        worker.start()
+        client.obs.on("streamlabs", on_twitch_event)
+        client.obs.on("twitch_account", on_twitch_event)
 
-        while cmd := input("<Enter> to exit\n"):
-            if not cmd:
-                break
+        # run for 30 seconds then disconnect client from server
+        client.sio.sleep(30)
 
 
 if __name__ == "__main__":
     main()
 ```
+
+note. From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
 
 ### Attributes
 

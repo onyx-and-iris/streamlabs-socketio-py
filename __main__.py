@@ -1,5 +1,4 @@
 import logging
-from threading import Thread
 
 import streamlabsio
 
@@ -15,22 +14,19 @@ def on_twitch_event(event, msg):
         print(f"Received follow from {msg.name}")
     elif event == "bits":
         print(f"{msg.name} donated {msg.amount} bits! With message: {msg.message}")
-
-
-def register_callbacks(client):
-    client.obs.on("streamlabs", on_twitch_event)
-    client.obs.on("twitch_account", on_twitch_event)
-    client.obs.on("youtube_account", on_youtube_event)
+    elif event == "donation":
+        print(f"{msg.name} donated {msg.formatted_amount}! With message: {msg.message}")
 
 
 def main():
+    # read token from config.toml
     with streamlabsio.connect() as client:
-        worker = Thread(target=register_callbacks, args=(client,), daemon=True)
-        worker.start()
+        client.obs.on("streamlabs", on_twitch_event)
+        client.obs.on("twitch_account", on_twitch_event)
+        client.obs.on("youtube_account", on_youtube_event)
 
-        while cmd := input("<Enter> to exit\n"):
-            if not cmd:
-                break
+        # run for 30 seconds then disconnect client from server
+        client.sio.sleep(30)
 
 
 if __name__ == "__main__":
