@@ -4,6 +4,8 @@ version = "0.1.1"
 description = "Get real time Twitch/Youtube events through Streamlabs SocketIO API"
 authors = ["onyx-and-iris <code@onyxandiris.online>"]
 license = "MIT"
+readme = "README.md"
+repository = "https://github.com/onyx-and-iris/streamlabs-socketio-py"
 
 [tool.poetry.dependencies]
 python = "^3.10"
