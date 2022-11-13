@@ -1,5 +1,4 @@
 import logging
-import pprint
 from pathlib import Path
 
 import socketio
@@ -11,8 +10,6 @@ except ModuleNotFoundError:
     import tomli as tomllib
 
 from .models import as_dataclass
-
-pp = pprint.PrettyPrinter(indent=4)
 
 
 class Client:
