@@ -34,8 +34,6 @@ You may pass it as a keyword argument.
 Example `__main__.py`:
 
 ```python
-from threading import Thread
-
 import streamlabsio
 
 
