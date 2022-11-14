@@ -13,7 +13,7 @@ from .models import as_dataclass
 
 
 class Client:
-    logger = logging.getLogger("socketio.socketio")
+    logger = logging.getLogger("socketio.client")
 
     def __init__(self, token=None):
         self.token = token or self._token_from_toml()
@@ -22,6 +22,9 @@ class Client:
         self.sio.on("event", self.event_handler)
         self.sio.on("disconnect", self.disconnect_handler)
         self.obs = Observable()
+        self.streamlabs = ("donation",)
+        self.twitch = ("follow", "subscription", "host", "bits", "raids")
+        self.youtube = ("follow", "subscription", "superchat")
 
     def __enter__(self):
         self.sio.connect(f"https://sockets.streamlabs.com?token={self.token}")
@@ -35,17 +38,20 @@ class Client:
         return conn["streamlabs"].get("token")
 
     def connect_handler(self):
-        self.logger.info("Connected to Twitch Socketio")
+        self.logger.info("Connected to Streamlabs Socket API")
 
     def event_handler(self, data):
-        self.obs.trigger(
-            data.get("for"),
-            data["type"],
-            as_dataclass(data["type"], *data["message"]),
-        )
+        if "for" in data and data["type"] in set(
+            self.streamlabs + self.twitch + self.youtube
+        ):
+            self.obs.trigger(
+                data["for"],
+                data["type"],
+                as_dataclass(data["type"], *data["message"]),
+            )
 
     def disconnect_handler(self):
-        self.logger.info("Disconnected from Twitch Socketio")
+        self.logger.info("Disconnected from Streamlabs Socket API")
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.sio.disconnect()

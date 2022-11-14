@@ -3,11 +3,11 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
-# A Python client for Streamlabs SocketIO API
+# A Python client for Streamlabs Socket API
 
 ### Requirements
 
--   A Streamlabs SocketIO API key.
+-   A Streamlabs Socket API key.
     -   You can acquire this by logging into your Streamlabs.com dashboard then `Settings->Api Settings->API Tokens`
 
 ### How to install using pip
@@ -54,7 +54,9 @@ if __name__ == "__main__":
     main()
 ```
 
-note. From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
+#### note
+
+From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
 
 ### Attributes
 
@@ -69,4 +71,4 @@ def on_twitch_event(event, msg):
 
 ### Official Documentation
 
--   [Streamlabs SocketIO API](https://dev.streamlabs.com/docs/socket-api)
+-   [Streamlabs Socket API](https://dev.streamlabs.com/docs/socket-api)
