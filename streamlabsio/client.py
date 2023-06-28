@@ -74,7 +74,9 @@ class Client:
             self.obs.trigger(
                 data["for"],
                 data["type"],
-                data if self._raw else as_dataclass(data["type"], *data["message"]),
+                *data["message"]
+                if self._raw
+                else as_dataclass(data["type"], *data["message"]),
             )
             self.logger.debug(data)
 
