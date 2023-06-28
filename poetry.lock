@@ -1,6 +1,6 @@
 [[package]]
 name = "black"
-version = "22.10.0"
+version = "22.12.0"
 description = "The uncompromising code formatter."
 category = "dev"
 optional = false
@@ -12,6 +12,8 @@ mypy-extensions = ">=0.4.3"
 pathspec = ">=0.9.0"
 platformdirs = ">=2"
 tomli = {version = ">=1.1.0", markers = "python_full_version < \"3.11.0a7\""}
+typed-ast = {version = ">=1.4.2", markers = "python_version < \"3.8\" and implementation_name == \"cpython\""}
+typing-extensions = {version = ">=3.10.0.0", markers = "python_version < \"3.10\""}
 
 [package.extras]
 colorama = ["colorama (>=0.4.3)"]
@@ -20,23 +22,36 @@ jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
 uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
+name = "cachetools"
+version = "5.3.1"
+description = "Extensible memoizing collections and decorators"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "certifi"
-version = "2022.9.24"
+version = "2023.5.7"
 description = "Python package for providing Mozilla's CA Bundle."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "chardet"
+version = "5.1.0"
+description = "Universal encoding detector for Python 3"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "charset-normalizer"
-version = "2.1.1"
+version = "3.1.0"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 category = "main"
 optional = false
-python-versions = ">=3.6.0"
-
-[package.extras]
-unicode_backport = ["unicodedata2"]
+python-versions = ">=3.7.0"
 
 [[package]]
 name = "click"
@@ -48,6 +63,7 @@ python-versions = ">=3.7"
 
 [package.dependencies]
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
+importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
 name = "colorama"
@@ -58,6 +74,37 @@ optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 
 [[package]]
+name = "distlib"
+version = "0.3.6"
+description = "Distribution utilities"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "exceptiongroup"
+version = "1.1.1"
+description = "Backport of PEP 654 (exception groups)"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+test = ["pytest (>=6)"]
+
+[[package]]
+name = "filelock"
+version = "3.12.2"
+description = "A platform independent file lock."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["furo (>=2023.5.20)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sphinx (>=7.0.1)"]
+testing = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "diff-cover (>=7.5)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "pytest-timeout (>=2.1)", "pytest (>=7.3.1)"]
+
+[[package]]
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -66,26 +113,51 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "importlib-metadata"
+version = "6.7.0"
+description = "Read metadata from Python packages"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+typing-extensions = {version = ">=3.6.4", markers = "python_version < \"3.8\""}
+zipp = ">=0.5"
+
+[package.extras]
+docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo", "sphinx-lint", "jaraco.tidelift (>=1.4)"]
+perf = ["ipython"]
+testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=1.3)", "pytest-ruff", "packaging", "pyfakefs", "flufl.flake8", "pytest-perf (>=0.9.2)", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "importlib-resources (>=1.3)"]
+
+[[package]]
+name = "iniconfig"
+version = "2.0.0"
+description = "brain-dead simple config-ini parsing"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "isort"
-version = "5.10.1"
+version = "5.11.5"
 description = "A Python utility / library to sort Python imports."
 category = "dev"
 optional = false
-python-versions = ">=3.6.1,<4.0"
+python-versions = ">=3.7.0"
 
 [package.extras]
-pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
-requirements_deprecated_finder = ["pipreqs", "pip-api"]
+pipfile-deprecated-finder = ["pipreqs", "requirementslib", "pip-shims (>=0.5.2)"]
+requirements-deprecated-finder = ["pipreqs", "pip-api"]
 colors = ["colorama (>=0.4.3,<0.5.0)"]
 plugins = ["setuptools"]
 
 [[package]]
 name = "mypy-extensions"
-version = "0.4.3"
-description = "Experimental type system extensions for programs checked with the mypy typechecker."
+version = "1.0.0"
+description = "Type system extensions for programs checked with the mypy type checker."
 category = "dev"
 optional = false
-python-versions = "*"
+python-versions = ">=3.5"
 
 [[package]]
 name = "observable"
@@ -96,8 +168,16 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "packaging"
+version = "23.1"
+description = "Core utilities for Python packages"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "pathspec"
-version = "0.10.2"
+version = "0.11.1"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
@@ -105,15 +185,69 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "platformdirs"
-version = "2.5.4"
+version = "3.8.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 
+[package.dependencies]
+typing-extensions = {version = ">=4.6.3", markers = "python_version < \"3.8\""}
+
 [package.extras]
-docs = ["furo (>=2022.9.29)", "proselint (>=0.13)", "sphinx-autodoc-typehints (>=1.19.4)", "sphinx (>=5.3)"]
-test = ["appdirs (==1.4.4)", "pytest-cov (>=4)", "pytest-mock (>=3.10)", "pytest (>=7.2)"]
+docs = ["furo (>=2023.5.20)", "proselint (>=0.13)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sphinx (>=7.0.1)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "pytest (>=7.3.1)"]
+
+[[package]]
+name = "pluggy"
+version = "1.2.0"
+description = "plugin and hook calling mechanisms for python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["pytest", "pytest-benchmark"]
+
+[[package]]
+name = "pyproject-api"
+version = "1.5.2"
+description = "API to interact with the python pyproject.toml based projects"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+packaging = ">=23.1"
+tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
+
+[package.extras]
+docs = ["furo (>=2023.5.20)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)", "sphinx (>=7.0.1)"]
+testing = ["covdefaults (>=2.3)", "importlib-metadata (>=6.6)", "pytest-cov (>=4.1)", "pytest-mock (>=3.10)", "pytest (>=7.3.1)", "setuptools (>=67.8)", "wheel (>=0.40)"]
+
+[[package]]
+name = "pytest"
+version = "7.4.0"
+description = "pytest: simple powerful testing with Python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
+exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11\""}
+importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
+iniconfig = "*"
+packaging = "*"
+pluggy = ">=0.12,<2.0"
+tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
+
+[package.extras]
+testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
 name = "python-engineio"
@@ -150,17 +284,17 @@ client = ["requests (>=2.21.0)", "websocket-client (>=0.54.0)"]
 
 [[package]]
 name = "requests"
-version = "2.28.1"
+version = "2.31.0"
 description = "Python HTTP for Humans."
 category = "main"
 optional = false
-python-versions = ">=3.7, <4"
+python-versions = ">=3.7"
 
 [package.dependencies]
 certifi = ">=2017.4.17"
-charset-normalizer = ">=2,<3"
+charset-normalizer = ">=2,<4"
 idna = ">=2.5,<4"
-urllib3 = ">=1.21.1,<1.27"
+urllib3 = ">=1.21.1,<3"
 
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
@@ -183,21 +317,82 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "tox"
+version = "4.6.3"
+description = "tox is a generic virtualenv management and test command line tool"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+cachetools = ">=5.3.1"
+chardet = ">=5.1"
+colorama = ">=0.4.6"
+filelock = ">=3.12.2"
+importlib-metadata = {version = ">=6.6", markers = "python_version < \"3.8\""}
+packaging = ">=23.1"
+platformdirs = ">=3.5.3"
+pluggy = ">=1"
+pyproject-api = ">=1.5.2"
+tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
+typing-extensions = {version = ">=4.6.3", markers = "python_version < \"3.8\""}
+virtualenv = ">=20.23.1"
+
+[package.extras]
+docs = ["furo (>=2023.5.20)", "sphinx-argparse-cli (>=1.11.1)", "sphinx-autodoc-typehints (>=1.23.2,!=1.23.4)", "sphinx-copybutton (>=0.5.2)", "sphinx-inline-tabs (>=2023.4.21)", "sphinx (>=7.0.1)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.6)"]
+testing = ["build[virtualenv] (>=0.10)", "covdefaults (>=2.3)", "detect-test-pollution (>=1.1.1)", "devpi-process (>=0.3.1)", "diff-cover (>=7.6)", "distlib (>=0.3.6)", "flaky (>=3.7)", "hatch-vcs (>=0.3)", "hatchling (>=1.17.1)", "psutil (>=5.9.5)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "pytest-xdist (>=3.3.1)", "pytest (>=7.3.2)", "re-assert (>=1.1)", "time-machine (>=2.10)", "wheel (>=0.40)"]
+
+[[package]]
+name = "typed-ast"
+version = "1.5.4"
+description = "a fork of Python 2 and 3 ast modules with type comment support"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
+name = "typing-extensions"
+version = "4.6.3"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[[package]]
 name = "urllib3"
-version = "1.26.12"
+version = "2.0.3"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4"
+python-versions = ">=3.7"
 
 [package.extras]
-brotli = ["brotlicffi (>=0.8.0)", "brotli (>=1.0.9)", "brotlipy (>=0.6.0)"]
-secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "certifi", "urllib3-secure-extra", "ipaddress"]
-socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
+brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
+secure = ["certifi", "cryptography (>=1.9)", "idna (>=2.0.0)", "pyopenssl (>=17.1.0)", "urllib3-secure-extra"]
+socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
+zstd = ["zstandard (>=0.18.0)"]
+
+[[package]]
+name = "virtualenv"
+version = "20.23.1"
+description = "Virtual Python Environment builder"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+distlib = ">=0.3.6,<1"
+filelock = ">=3.12,<4"
+importlib-metadata = {version = ">=6.6", markers = "python_version < \"3.8\""}
+platformdirs = ">=3.5.1,<4"
+
+[package.extras]
+docs = ["furo (>=2023.5.20)", "proselint (>=0.13)", "sphinx-argparse (>=0.4)", "sphinx (>=7.0.1)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.6)"]
+test = ["covdefaults (>=2.3)", "coverage-enable-subprocess (>=1)", "coverage (>=7.2.7)", "flaky (>=3.7)", "packaging (>=23.1)", "pytest-env (>=0.8.1)", "pytest-freezer (>=0.4.6)", "pytest-mock (>=3.10)", "pytest-randomly (>=3.12)", "pytest-timeout (>=2.1)", "pytest (>=7.3.1)", "setuptools (>=67.8)", "time-machine (>=2.9)"]
 
 [[package]]
 name = "websocket-client"
-version = "1.4.2"
+version = "1.6.1"
 description = "WebSocket client for Python with low level API options"
 category = "main"
 optional = false
@@ -208,27 +403,55 @@ docs = ["Sphinx (>=3.4)", "sphinx-rtd-theme (>=0.5)"]
 optional = ["python-socks", "wsaccel"]
 test = ["websockets"]
 
+[[package]]
+name = "zipp"
+version = "3.15.0"
+description = "Backport of pathlib-compatible object wrapper for zip files"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo", "sphinx-lint", "jaraco.tidelift (>=1.4)"]
+testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-cov", "pytest-enabler (>=1.3)", "jaraco.itertools", "jaraco.functools", "more-itertools", "big-o", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "pytest-flake8"]
+
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.10"
-content-hash = "fd2bc058c27869f25132aa1baf2599c482e6f926ee75743cfe7ac1fa1042d4bd"
+python-versions = "^3.7"
+content-hash = "9d75c174c1d055013bab4669a426bbbcd1d5fe31243e1569c8aff0524c143496"
 
 [metadata.files]
 black = []
+cachetools = []
 certifi = []
+chardet = []
 charset-normalizer = []
 click = []
 colorama = []
+distlib = []
+exceptiongroup = []
+filelock = []
 idna = []
+importlib-metadata = []
+iniconfig = []
 isort = []
 mypy-extensions = []
 observable = []
+packaging = []
 pathspec = []
 platformdirs = []
+pluggy = []
+pyproject-api = []
+pytest = []
 python-engineio = []
 python-socketio = []
 requests = []
 six = []
 tomli = []
+tox = []
+typed-ast = []
+typing-extensions = []
 urllib3 = []
+virtualenv = []
 websocket-client = []
+zipp = []
