@@ -68,7 +68,7 @@ From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client
 The following keyword arguments may be passed:
 
 -   `token`: str   Streamlabs SocketIO api token.
--   `raw`: boolean=False    Receive raw json objects.
+-   `raw`: boolean=False    Receive raw data messages as json objects.
 
 ### Attributes
 
