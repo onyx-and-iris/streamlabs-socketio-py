@@ -128,5 +128,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.vscode/
+
 # toml config
 config.toml
+
+# test
+quick.py
+logging.json
+tests/

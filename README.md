@@ -10,6 +10,8 @@
 -   A Streamlabs Socket API key.
     -   You can acquire this by logging into your Streamlabs.com dashboard then `Settings->Api Settings->API Tokens`
 
+-   Python 3.8 or greater
+
 ### How to install using pip
 
 ```
@@ -37,8 +39,8 @@ Example `__main__.py`:
 import streamlabsio
 
 
-def on_twitch_event(event, msg):
-    print(f"{event}: {msg.attrs()}")
+def on_twitch_event(event, data):
+    print(f"{event}: {data.attrs()}")
 
 
 def main():
@@ -58,6 +60,14 @@ if __name__ == "__main__":
 
 From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
 
+### Client class
+`streamlabsio.connect(token="<apikey>", raw=False)`
+
+The following keyword arguments may be passed:
+
+-   `token`: str   Streamlabs SocketIO api token.
+-   `raw`: boolean=False    Receive raw json objects.
+
 ### Attributes
 
 For event messages you may inspect the available attributes using `attrs()`.
@@ -68,6 +78,14 @@ example:
 def on_twitch_event(event, msg):
     print(f"{event}: {msg.attrs()}")
 ```
+
+### Errors
+
+-   `SteamlabsSIOConnectionError`: Exception raised when connection errors occur
+
+### Logging
+
+To view raw incoming event data set logging level to DEBUG. Check `debug` example.
 
 ### Official Documentation
 
