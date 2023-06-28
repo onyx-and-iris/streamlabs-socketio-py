@@ -5,6 +5,8 @@
 
 # A Python client for Streamlabs Socket API
 
+For an outline of past/future changes refer to: [CHANGELOG](CHANGELOG.md)
+
 ### Requirements
 
 -   A Streamlabs Socket API key.
