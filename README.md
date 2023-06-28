@@ -70,13 +70,13 @@ The following keyword arguments may be passed:
 
 ### Attributes
 
-For event messages you may inspect the available attributes using `attrs()`.
+For event data you may inspect the available attributes using `attrs()`.
 
 example:
 
 ```python
-def on_twitch_event(event, msg):
-    print(f"{event}: {msg.attrs()}")
+def on_twitch_event(event, data):
+    print(f"{event}: {data.attrs()}")
 ```
 
 ### Errors
