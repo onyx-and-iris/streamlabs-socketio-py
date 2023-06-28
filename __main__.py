@@ -1,21 +1,19 @@
-import logging
-
 import streamlabsio
 
-logging.basicConfig(level=logging.INFO)
+
+def on_youtube_event(event, data):
+    print(f"{event}: {data.attrs()}")
 
 
-def on_youtube_event(event, msg):
-    print(f"{event}: {msg.attrs()}")
-
-
-def on_twitch_event(event, msg):
+def on_twitch_event(event, data):
     if event == "follow":
-        print(f"Received follow from {msg.name}")
+        print(f"Received follow from {data.name}")
     elif event == "bits":
-        print(f"{msg.name} donated {msg.amount} bits! With message: {msg.message}")
+        print(f"{data.name} donated {data.amount} bits! With message: {data.message}")
     elif event == "donation":
-        print(f"{msg.name} donated {msg.formatted_amount}! With message: {msg.message}")
+        print(
+            f"{data.name} donated {data.formatted_amount}! With message: {data.message}"
+        )
 
 
 def main():
