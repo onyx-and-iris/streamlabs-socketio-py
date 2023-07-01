@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "streamlabsio"
-version = "1.0.1"
+version = "1.0.2"
 description = "Get real time Twitch/Youtube events through Streamlabs SocketIO API"
 authors = ["onyx-and-iris <code@onyxandiris.online>"]
 license = "MIT"

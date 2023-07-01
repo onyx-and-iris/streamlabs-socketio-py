@@ -71,12 +71,13 @@ class Client:
         if "for" in data and data["type"] in set(
             self.streamlabs + self.twitch + self.youtube
         ):
+            message = data["message"][0] if isinstance(data["message"][0], dict) else {}
             self.obs.trigger(
                 data["for"],
                 data["type"],
-                *data["message"]
+                message
                 if self._raw
-                else as_dataclass(data["type"], *data["message"]),
+                else as_dataclass(data["type"], message),
             )
             self.logger.debug(data)
 
