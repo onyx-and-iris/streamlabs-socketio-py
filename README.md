@@ -1,5 +1,6 @@
 [![PyPI version](https://badge.fury.io/py/streamlabsio.svg)](https://badge.fury.io/py/streamlabsio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/onyx-and-iris/streamlabs-socketio-py/blob/dev/LICENSE)
+[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
@@ -69,6 +70,10 @@ The following keyword arguments may be passed:
 
 -   `token`: str   Streamlabs SocketIO api token.
 -   `raw`: boolean=False    Receive raw data messages as json objects.
+
+The following attribute is available:
+
+-   `raw`: boolean Toggle raw mode at runtime.
 
 ### Attributes
 
