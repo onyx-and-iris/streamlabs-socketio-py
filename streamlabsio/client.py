@@ -33,7 +33,25 @@ class Client:
             raise SteamlabsSIOConnectionError(
                 "no connection could be established to the Streamlabs SIO server"
             ) from e
+        self.log_mode()
         return self
+
+    @property
+    def raw(self):
+        return self._raw
+
+    @raw.setter
+    def raw(self, val):
+        self._raw = val
+        self.log_mode()
+
+    def log_mode(self):
+        INFO_MSG = (f"Running client in {'raw' if self.raw else 'normal'} mode.",)
+        if self.raw:
+            INFO_MSG += ("raw JSON messages will be passed to callbacks",)
+        else:
+            INFO_MSG += ("event data objects will be passed to callbacks",)
+        self.logger.info(" ".join(INFO_MSG))
 
     def _token_from_toml(self) -> str:
         try:
@@ -56,10 +74,10 @@ class Client:
                 raise FileNotFoundError("config.toml was not found")
             with open(filepath, "rb") as f:
                 conn = tomllib.load(f)
-                assert "token" in conn.get(
-                    "streamlabs"
-                ), "token not found in config.toml"
-            return conn["streamlabs"].get("token")
+                assert (
+                    "streamlabs" in conn and "token" in conn["streamlabs"]
+                ), "expected [streamlabs][token] in config.toml"
+            return conn["streamlabs"]["token"]
         except (FileNotFoundError, tomllib.TOMLDecodeError) as e:
             self.logger.error(f"{type(e).__name__}: {e}")
             raise
@@ -71,13 +89,11 @@ class Client:
         if "for" in data and data["type"] in set(
             self.streamlabs + self.twitch + self.youtube
         ):
-            message = data["message"][0] if isinstance(data["message"][0], dict) else {}
+            message = data["message"][0]
             self.obs.trigger(
                 data["for"],
                 data["type"],
-                message
-                if self._raw
-                else as_dataclass(data["type"], message),
+                message if self.raw else as_dataclass(data["type"], message),
             )
             self.logger.debug(data)
 
