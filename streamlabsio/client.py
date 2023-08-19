@@ -46,12 +46,12 @@ class Client:
         self.log_mode()
 
     def log_mode(self):
-        INFO_MSG = (f"Running client in {'raw' if self.raw else 'normal'} mode.",)
+        info = (f"Running client in {'raw' if self.raw else 'normal'} mode.",)
         if self.raw:
-            INFO_MSG += ("raw JSON messages will be passed to callbacks",)
+            info += ("raw JSON messages will be passed to callbacks",)
         else:
-            INFO_MSG += ("event data objects will be passed to callbacks",)
-        self.logger.info(" ".join(INFO_MSG))
+            info += ("event data objects will be passed to callbacks",)
+        self.logger.info(" ".join(info))
 
     def _token_from_toml(self) -> str:
         try:

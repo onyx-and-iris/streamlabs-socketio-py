@@ -88,6 +88,7 @@ def on_twitch_event(event, data):
 
 ### Errors
 
+-   `SteamlabsSIOError`: Base StreamlabsSIO error class
 -   `SteamlabsSIOConnectionError`: Exception raised when connection errors occur
 
 ### Logging
