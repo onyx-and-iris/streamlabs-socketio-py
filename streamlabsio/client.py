@@ -22,7 +22,7 @@ class Client:
         self.sio.on("disconnect", self.disconnect_handler)
         self.obs = Observable()
         self.streamlabs = ("donation",)
-        self.twitch = ("follow", "subscription", "host", "bits", "raids")
+        self.twitch = ("follow", "subscription", "host", "bits", "raid")
         self.youtube = ("follow", "subscription", "superchat")
 
     def __enter__(self):
