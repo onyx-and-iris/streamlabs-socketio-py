@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   [x]
 
+## [1.1.1] - 2024-11-06
+
+### Fixed
+
+-   [PR #8][pr-8] fixes bug receiving `raid` events.
+
 ## [1.0.0] - 2023-06-28
 
 The only potential breaking change, a new error class raised if the initial connection fails.
@@ -28,3 +34,6 @@ The only potential breaking change, a new error class raised if the initial conn
 -   Python minimum required version changed to 3.8
 -   new error class
     -   `SteamlabsSIOConnectionError` raised on a connection error
+
+
+[pr-8]: https://github.com/onyx-and-iris/streamlabs-socketio-py/pull/8
