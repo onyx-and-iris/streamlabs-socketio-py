@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 def to_snake_case(s):
-    return re.sub(r"(?<!^)(?=[A-Z])", "_", s).lower()
+    return re.sub(r'(?<!^)(?=[A-Z])', '_', s).lower()
 
 
 def as_dataclass(identifier, data):
@@ -12,10 +12,10 @@ def as_dataclass(identifier, data):
 
     return dataclass(
         type(
-            f"{identifier.capitalize()}Dataclass",
+            f'{identifier.capitalize()}Dataclass',
             (),
             {
-                "attrs": attrs,
+                'attrs': attrs,
                 **{to_snake_case(k): v for k, v in data.items()},
             },
         )

@@ -4,47 +4,53 @@ import streamlabsio
 
 config.dictConfig(
     {
-        "version": 1,
-        "formatters": {
-            "standard": {
-                "format": "%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s"
+        'version': 1,
+        'disable_existing_loggers': False,
+        'loggers': {
+            'streamlabsio.client': {
+                'level': 'DEBUG',
+                'handlers': ['console'],
+                'propagate': False,
             }
         },
-        "handlers": {
-            "stream": {
-                "level": "DEBUG",
-                "class": "logging.StreamHandler",
-                "formatter": "standard",
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+                'level': 'DEBUG',
+                'formatter': 'simple',
+                'stream': 'ext://sys.stdout',
             }
         },
-        "loggers": {"streamlabsio.client": {"handlers": ["stream"], "level": "DEBUG"}},
+        'formatters': {
+            'simple': {'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s'}
+        },
     }
 )
 
 
 def on_youtube_event(event, data):
-    print(f"{event}: {data.attrs()}")
+    print(f'{event}: {data.attrs()}')
 
 
 def on_twitch_event(event, data):
-    if event == "follow":
-        print(f"Received follow from {data.name}")
-    elif event == "bits":
-        print(f"{data.name} donated {data.amount} bits! With message: {data.message}")
-    elif event == "donation":
+    if event == 'follow':
+        print(f'Received follow from {data.name}')
+    elif event == 'bits':
+        print(f'{data.name} donated {data.amount} bits! With message: {data.message}')
+    elif event == 'donation':
         print(
-            f"{data.name} donated {data.formatted_amount}! With message: {data.message}"
+            f'{data.name} donated {data.formatted_amount}! With message: {data.message}'
         )
 
 
 def main():
     with streamlabsio.connect() as client:
-        client.obs.on("streamlabs", on_twitch_event)
-        client.obs.on("twitch_account", on_twitch_event)
-        client.obs.on("youtube_account", on_youtube_event)
+        client.obs.on('streamlabs', on_twitch_event)
+        client.obs.on('twitch_account', on_twitch_event)
+        client.obs.on('youtube_account', on_youtube_event)
 
         client.sio.sleep(30)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
