@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Any, Union
+from typing import Union
 
 import socketio
 from observable import Observable
@@ -113,7 +113,7 @@ class Client:
     def connect_handler(self) -> None:
         self.logger.info('Connected to Streamlabs Socket API')
 
-    def event_handler(self, data: Any) -> None:
+    def event_handler(self, data: dict) -> None:
         """
         Handles incoming events and triggers corresponding OBS actions.
         Args:
