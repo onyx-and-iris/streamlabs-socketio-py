@@ -2,7 +2,7 @@
 
 The underlying socketio and engineio packages emit a lot of logs so it may be useful to filter out streamlabsio logs.
 
-This example prints raw messages whenever Client.event_handler() receives data.
+This example prints raw log messages whenever Client.event_handler() receives data.
 
 ## Use
 

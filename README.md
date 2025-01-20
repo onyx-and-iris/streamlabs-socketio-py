@@ -1,8 +1,7 @@
 [![PyPI version](https://badge.fury.io/py/streamlabsio.svg)](https://badge.fury.io/py/streamlabsio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/onyx-and-iris/streamlabs-socketio-py/blob/dev/LICENSE)
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 # A Python client for Streamlabs Socket API
 
@@ -43,19 +42,19 @@ import streamlabsio
 
 
 def on_twitch_event(event, data):
-    print(f"{event}: {data.attrs()}")
+    print(f'{event}: {data.attrs()}')
 
 
 def main():
-    with streamlabsio.connect(token="<apikey>") as client:
-        client.obs.on("streamlabs", on_twitch_event)
-        client.obs.on("twitch_account", on_twitch_event)
+    with streamlabsio.connect(token='<apikey>') as client:
+        client.obs.on('streamlabs', on_twitch_event)
+        client.obs.on('twitch_account', on_twitch_event)
 
         # run for 30 seconds then disconnect client from server
         client.sio.sleep(30)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 ```
 
@@ -83,7 +82,7 @@ example:
 
 ```python
 def on_twitch_event(event, data):
-    print(f"{event}: {data.attrs()}")
+    print(f'{event}: {data.attrs()}')
 ```
 
 ### Errors
