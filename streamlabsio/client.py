@@ -76,5 +76,5 @@ class Client:
         self._logger.info('Disconnected from Streamlabs Socket API')
 
 
-def request_client_object(token: str, raw: bool = False) -> Client:
+def request_client_object(*, token: str, raw: bool = False) -> Client:
     return Client(token=token, raw=raw)
