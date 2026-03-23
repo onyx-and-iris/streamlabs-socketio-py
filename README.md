@@ -26,13 +26,18 @@ pip install streamlabsio
 import streamlabsio
 
 
-def on_twitch_event(event, data):
+def on_streamlabs_event(event, data):
     print(f'{event}: {data.attrs()}')
 
 
+def on_twitch_event(event, data):
+    if event == 'follow':
+        print(f'{data.name} just followed!')
+
+
 def main():
-    with streamlabsio.connect(token='<apikey>') as client:
-        client.obs.on('streamlabs', on_twitch_event)
+    with streamlabsio.connect(token="<API token>") as client:
+        client.obs.on('streamlabs', on_streamlabs_event)
         client.obs.on('twitch_account', on_twitch_event)
 
         # run for 30 seconds then disconnect client from server
@@ -43,19 +48,17 @@ if __name__ == '__main__':
     main()
 ```
 
-#### note
-
-From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
+> note: From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
 
 ### Client class
-`streamlabsio.connect(token="<apikey>", raw=False)`
+*`streamlabsio.connect(*, token: str, raw: bool = False)`*
 
 The following keyword arguments may be passed:
 
--   `token`: str   Streamlabs SocketIO api token.
--   `raw`: boolean=False    Receive raw data messages as json objects.
+-   token: Streamlabs SocketIO api token.
+-   raw: Receive raw data messages as json objects.
 
-### Attributes
+### Event Data Attributes
 
 For event data you may inspect the available attributes using `attrs()`.
 
