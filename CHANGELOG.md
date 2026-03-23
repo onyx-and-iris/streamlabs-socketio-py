@@ -8,7 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
--   [x]
+The following changes are proposals for v2.
+
+### Fixed
+
+-   The returned dataclasses now work properly with dataclass methods such as `asdict`. See the events example.
+
+### Removed
+
+-   Built-in support for loading the token from a config.toml. This is a job better left to the library consumer.
+-   {Client}.raw property, you can still configure the Client to return raw data via the raw kwarg.
+-   Support for python versions 3.8 and 3.9.
+
+### Changed
+
+-   loguru is now used for logging. See the events example for a demonstration.
+
 
 ## [1.1.2] - 2024-11-06
 

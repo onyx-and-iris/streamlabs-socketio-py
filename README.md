@@ -12,30 +12,15 @@ For an outline of past/future changes refer to: [CHANGELOG](CHANGELOG.md)
 -   A Streamlabs Socket API key.
     -   You can acquire this by logging into your Streamlabs.com dashboard then `Settings->Api Settings->API Tokens`
 
--   Python 3.8 or greater
+-   Python 3.10 or greater
 
-### How to install using pip
+### Install
 
-```
+```console
 pip install streamlabsio
 ```
 
-### How to Use
-
-You may store your api key in a `config.toml` file, its contents should resemble:
-
-```toml
-[streamlabs]
-token = "<apikey>"
-```
-
-Place it next to your `__main__.py` file.
-
-#### Otherwise:
-
-You may pass it as a keyword argument.
-
-Example `__main__.py`:
+### Use
 
 ```python
 import streamlabsio
@@ -69,10 +54,6 @@ The following keyword arguments may be passed:
 
 -   `token`: str   Streamlabs SocketIO api token.
 -   `raw`: boolean=False    Receive raw data messages as json objects.
-
-The following attribute is available:
-
--   `raw`: boolean Toggle raw mode at runtime.
 
 ### Attributes
 

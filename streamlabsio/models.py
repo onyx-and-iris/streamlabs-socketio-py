@@ -1,22 +1,30 @@
+import keyword
 import re
 from dataclasses import dataclass
 
 
-def to_snake_case(s):
+def to_snake_case(s: str) -> str:
     return re.sub(r'(?<!^)(?=[A-Z])', '_', s).lower()
 
 
-def as_dataclass(identifier, data):
-    def attrs():
-        return list(to_snake_case(k) for k in data.keys())
+def safe_field_name(name: str) -> str:
+    return name + '_' if keyword.iskeyword(name) else name
 
-    return dataclass(
+
+def as_dataclass(name: str, data: dict):
+    def attrs(self) -> list:
+        return list(self.__annotations__.keys())
+
+    dc_CLS = dataclass(
         type(
-            f'{identifier.capitalize()}Dataclass',
+            f'{name}Dataclass',
             (),
             {
+                '__annotations__': {
+                    safe_field_name(to_snake_case(k)): type(v) for k, v in data.items()
+                },
                 'attrs': attrs,
-                **{to_snake_case(k): v for k, v in data.items()},
             },
         )
     )
+    return dc_CLS(**{safe_field_name(to_snake_case(k)): v for k, v in data.items()})

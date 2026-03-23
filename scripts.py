@@ -3,6 +3,6 @@ import sys
 from pathlib import Path
 
 
-def ex_debug():
-    scriptpath = Path.cwd() / 'examples' / 'debug' / '.'
+def ex_events():
+    scriptpath = Path.cwd() / 'examples' / 'events' / '.'
     subprocess.run([sys.executable, str(scriptpath)])
