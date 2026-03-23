@@ -76,7 +76,13 @@ def on_twitch_event(event, data):
 
 ### Logging
 
-To view raw incoming event data set logging level to DEBUG. Check `debug` example.
+To view the logs emitted by the streamlabsio library simply add the following to your code:
+
+```python
+from loguru import logger
+
+logger.enable('streamlabsio')
+```
 
 ### Official Documentation
 
