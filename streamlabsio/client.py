@@ -17,15 +17,15 @@ class Client:
         self._logger = logger.bind(name=self.__class__.__name__)
         self._token = token
         self._raw = raw
-        self.sio = socketio.Client()
-        self.sio.on('connect', self._connect_handler)
-        self.sio.on('event', self._event_handler)
-        self.sio.on('disconnect', self._disconnect_handler)
+        self._sio = socketio.Client()
+        self._sio.on('connect', self._connect_handler)
+        self._sio.on('event', self._event_handler)
+        self._sio.on('disconnect', self._disconnect_handler)
         self.obs = Observable()
 
     def __enter__(self) -> 'Client':
         try:
-            self.sio.connect(f'https://sockets.streamlabs.com?token={self._token}')
+            self._sio.connect(f'https://sockets.streamlabs.com?token={self._token}')
         except socketio.exceptions.ConnectionError as e:
             self._logger.exception('Connection to Streamlabs Socket API failed')
             ERR_MSG = 'Failed to connect to Streamlabs Socket API. Please check your token and network connection.'
@@ -33,14 +33,31 @@ class Client:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-        self.sio.disconnect()
+        self._sio.disconnect()
+
+    def wait(self, seconds: float | None = None) -> None:
+        """Exposes the wait and sleep methods of the socketio client to allow the user to keep the connection alive.
+
+
+        Args:
+            seconds (float | None): If None, the method will block indefinitely.
+
+        Returns:
+            None
+        """
+        if seconds is None:
+            self._sio.wait()
+        else:
+            self._sio.sleep(seconds)
 
     def _connect_handler(self) -> None:
         self._logger.info('Connected to Streamlabs Socket API')
 
     def _event_handler(self, data: dict) -> None:
         """
-        Handles incoming events and triggers corresponding OBS actions.
+        Handles incoming events and triggers the callback functions.
+
+
         Args:
             data (dict): The event data containing information about the event.
                 Expected keys:
