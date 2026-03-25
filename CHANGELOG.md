@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 The following changes are proposals for v2.
 
+### Added
+
+-   wait() method on the Client class, it's a convenience method that exposes {socketio.Client}.sleep() and {socketio.Client}.wait().
+
 ### Fixed
 
 -   The returned dataclasses now work properly with dataclass methods such as `asdict`. See the events example.
@@ -22,7 +26,7 @@ The following changes are proposals for v2.
 
 ### Changed
 
--   loguru is now used for logging. See the events example for a demonstration.
+-   loguru is now used for logging. See the examples for a demonstration.
 
 
 ## [1.1.2] - 2024-11-06
