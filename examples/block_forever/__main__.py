@@ -1,5 +1,4 @@
 import os
-from dataclasses import asdict
 
 from loguru import logger
 
@@ -9,11 +8,9 @@ logger.enable('streamlabsio')
 
 
 def on_streamlabs_event(event, data):
-    print(data.attrs())
-
     match event:
         case 'donation':
-            print(f'{data.name} donated {data.amount}! With message: {data.message}')
+            print('{name} donated {amount}! With message: {message}'.format(**data))
 
 
 def on_twitch_event(event, data):
@@ -26,27 +23,32 @@ def on_twitch_event(event, data):
     }
 
     if event in event_message:
-        print(event_message[event].format(**asdict(data)))
+        print(event_message[event].format(**data))
 
 
 def on_youtube_event(event, data):
     event_message = {
         'follow': 'Received follow from {name}',
-        'superchat': '{name} donated {display_string} with a superchat! With comment: {comment}',
+        'superchat': '{name} donated {displayString} with a superchat! With comment: {comment}',
         'subscription': '{name} just subscribed for {months} months!',
     }
 
     if event in event_message:
-        print(event_message[event].format(**asdict(data)))
+        print(event_message[event].format(**data))
 
 
 def main():
-    with streamlabsio.connect(token=os.getenv('STREAMLABS_TOKEN')) as client:
-        client.obs.on('streamlabs', on_streamlabs_event)
-        client.obs.on('twitch_account', on_twitch_event)
-        client.obs.on('youtube_account', on_youtube_event)
+    try:
+        with streamlabsio.connect(
+            token=os.getenv('STREAMLABS_TOKEN'), raw=True
+        ) as client:
+            client.obs.on('streamlabs', on_streamlabs_event)
+            client.obs.on('twitch_account', on_twitch_event)
+            client.obs.on('youtube_account', on_youtube_event)
 
-        client.wait(30)
+            client.wait()
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == '__main__':

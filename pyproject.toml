@@ -27,6 +27,7 @@ envfile = ".env"
 
 [tool.poe.tasks]
 events.script = "scripts:ex_events"
+block-forever.script = "scripts:ex_block_forever"
 
 [tool.ruff]
 exclude = [
