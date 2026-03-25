@@ -41,22 +41,27 @@ def main():
         client.obs.on('twitch_account', on_twitch_event)
 
         # run for 30 seconds then disconnect client from server
-        client.sio.sleep(30)
+        client.wait(30)
 
 
 if __name__ == '__main__':
     main()
 ```
 
-> note: From the [SocketIO docs](https://python-socketio.readthedocs.io/en/latest/client.html#managing-background-tasks), `client.sio.wait()` may be used if your application has nothing to do in the main thread.
-
 ### Client class
-*`streamlabsio.connect(*, token: str, raw: bool = False)`*
+*`streamlabsio.connect(*, token: str, raw: bool = False)  -> Client`*
 
 The following keyword arguments may be passed:
 
 -   token: Streamlabs SocketIO api token.
 -   raw: Receive raw data messages as json objects.
+
+#### methods
+
+*wait(self, seconds: float | None = None) -> None*
+
+-   float: Time in seconds to block the main thread
+    -   If None, the method will block indefinitely.
 
 ### Event Data Attributes
 
