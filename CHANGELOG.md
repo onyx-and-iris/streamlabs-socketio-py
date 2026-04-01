@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-The following changes are proposals for v2.
+-   [x]
+
+## [2.0.0] - 2026-04-01
 
 ### Added
 
@@ -27,7 +29,6 @@ The following changes are proposals for v2.
 ### Changed
 
 -   loguru is now used for logging. See the examples for a demonstration.
-
 
 ## [1.1.2] - 2024-11-06
 
