@@ -94,4 +94,13 @@ class Client:
 
 
 def request_client_object(*, token: str, raw: bool = False) -> Client:
+    """Entry point for users to request a Client object.
+
+    Args:
+        token (str): The authentication token for the Streamlabs Socket API.
+        raw (bool, optional): If True, the client will return raw event data. Defaults to False.
+
+    Returns:
+        Client: An instance of the Client class.
+    """
     return Client(token=token, raw=raw)
